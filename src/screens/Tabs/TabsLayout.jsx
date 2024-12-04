@@ -4,7 +4,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import Home from './Home';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 // import Profile from './Profile';
-// import Create from './Create';
+import Create from './Create';
 import Icon from 'react-native-vector-icons/Ionicons';
 
 const TabsLayout = () => {
@@ -41,8 +41,8 @@ const Tab = createBottomTabNavigator();
         })}
       >
         <Tab.Screen name="home" component={Home} />
-        {/* <Tab.Screen name="create" component={Create} />
-        <Tab.Screen name="profile" component={Profile} /> */}
+        <Tab.Screen name="create" component={Create} />
+        {/* <Tab.Screen name="profile" component={Profile} /> */}
       </Tab.Navigator>
     </View>
   )

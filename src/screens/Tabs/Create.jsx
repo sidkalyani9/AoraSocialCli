@@ -4,14 +4,15 @@ import { FormField } from '../../components/FormField'
 import {icons} from '../../constants'
 // import { ResizeMode, Video } from 'expo-av'
 import { CustomButton } from '../../components/CustomButton'
-import * as DocumentPicker from 'expo-document-picker'
+// import * as DocumentPicker from 'expo-document-picker'
 import { createVideoPost } from '../../lib/appwrite'
 import { useGlobalContext } from '../../context/GlobalProvider'
+import { useNavigation } from '@react-navigation/native'
 // import { router } from 'expo-router'
 
 
 const Create = () => {
-  
+  const navigation = useNavigation()
   const [isUploading, setIsUploading] = useState(false)
   const {formData, setFormData} = useGlobalContext()
 
@@ -32,7 +33,7 @@ const Create = () => {
           })
 
           Alert.alert("Success", "Post Uploaded Successfully")
-          // router.push('/home')
+          navigation.push('tabs', {screens: 'home'})
         }
         catch(error){
           console.log(error);
@@ -65,21 +66,21 @@ const Create = () => {
       router.push('/click-picture')
     }
     else{
-      const result = await DocumentPicker.getDocumentAsync({
-        type: type==='video'
-          ? ['video/mp4', 'video/gif']
-          : ['image/png', 'image/jpeg']
-      })
+      // const result = await DocumentPicker.getDocumentAsync({
+      //   type: type==='video'
+      //     ? ['video/mp4', 'video/gif']
+      //     : ['image/png', 'image/jpeg']
+      // })
   
-      if(!result.canceled){
-        if(type === 'video'){
-          setFormData({...formData, video: result.assets[0]})
-        }
-        else{
+      // if(!result.canceled){
+      //   if(type === 'video'){
+      //     setFormData({...formData, video: result.assets[0]})
+      //   }
+      //   else{
 
-          setFormData({...formData, thumbnail: result.assets[0]})
-        }
-      }
+      //     setFormData({...formData, thumbnail: result.assets[0]})
+      //   }
+      // }
     }
   }
 
