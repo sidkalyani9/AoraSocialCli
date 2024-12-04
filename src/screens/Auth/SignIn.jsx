@@ -35,12 +35,10 @@ const SignIn = () => {
         const session = await signIn(formData.email, formData.password);
         console.log("Session:", session);
         if (session) {
-          const currentUser = null
-          await getCurrentUser();
+          const currentUser = await getCurrentUser();
           setUser(currentUser);
           setIsLoggedIn(true);
-          navigation.replace('Home')
-          // router.replace('/home')
+          navigation.replace('tabs',{screen:'home'})
         } else {
           Alert.alert("Invalid Credentials", "Please input valid credentials");
         }

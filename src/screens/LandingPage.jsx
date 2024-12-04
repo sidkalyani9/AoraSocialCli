@@ -26,31 +26,20 @@ const LandingPage = () => {
 
   const navigation = useNavigation();
 
-  if(!isLoading && isLoggedIn) {
-    navigation.navigate('tabs', {screen: 'home'})
-      // return(
-      // <>
-      // {navigation.navigate('tabs', {screen: 'home'})}
-      //   <ExpoImage
-      //   source={gifUri}
-      //   style={{ width: "100%", height: "100%" }}
-      // />
-      //   <Redirect href="/home" />
-      // </>
-      // ) 
-  }
+  useEffect(() => {
+    if (!isLoading && isLoggedIn) {
+      console.log("res loading: " + isLoading);
+      
+      // Navigate after rendering to avoid state update during render
+      navigation.navigate('tabs', { screen: 'home' });
+    }
+  }, [isLoading, isLoggedIn, navigation]);
 
-  if(loading){
-    
+  if (loading) {
     return (
       <View>
-        <Text>Hello</Text>
+        <Text>Loading...</Text>
       </View>
-        // <ExpoImage
-        //   source={gifUri}
-        //   style={{ width: "100%", height: "100%" }}
-        // />
-      
     );
   }
   else{

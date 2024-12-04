@@ -1,5 +1,5 @@
 import { View, Text, Image, RefreshControl, Dimensions, ActivityIndicator } from 'react-native'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { FlatList } from 'react-native'
 
 import { images } from '../../constants'
@@ -13,13 +13,20 @@ import { Loader } from '../../components/Loader'
 
 const Home = () => {
 
-  const { user } = useGlobalContext() || null;
+  const { user } = useGlobalContext();
+  const [userState, setUserState] = useState(true);
+  
   const {data:posts, loading , refetch} = useAppwrite(getAllPosts);
-  // console.log(posts);
   
   const {data:latestPosts, refetch:refetchLatestPosts} = useAppwrite(getLatestPosts);
   
   const [refreshing, setRefreshing] = useState(false)
+
+  useEffect(() => {
+    if (user) {
+      setUserState(false);
+    }
+  }, [user]);
 
   const onRefresh = async () => {
     setRefreshing(true)
@@ -38,7 +45,12 @@ const Home = () => {
                   Welcome Back
                 </Text>
                 <Text className="font-psemibold text-2xl text-white">
-                  {user?.username}
+                  {
+                    userState?
+                    ''
+                    :
+                    user?.username
+                  }
                 </Text>
               </View>
 

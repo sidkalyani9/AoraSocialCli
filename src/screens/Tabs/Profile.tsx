@@ -10,9 +10,11 @@ import { EmptyState } from '../../components/EmptyState'
 import { Loader } from '../../components/Loader'
 import { useGlobalContext } from '../../context/GlobalProvider'
 import { icons } from '../../constants'
+import { useNavigation } from '@react-navigation/native'
+import { InfoBox } from '../../components/InfoBox'
 
 const Profile = () => {
-
+  const navigation = useNavigation()
   const {user, setUser, setIsLoggedIn} = useGlobalContext()
   
   const {data:posts , refetch, loading} = useAppwrite(() => getUserPosts(user.$id));
@@ -21,6 +23,7 @@ const Profile = () => {
     await signOut()
     setUser(null)
     setIsLoggedIn(false)
+    navigation.replace("landing")
     // router.replace('/')
   }
 
