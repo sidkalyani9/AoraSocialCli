@@ -2,6 +2,7 @@ import { Alert } from "react-native";
 import { useEffect, useState } from "react";
 
 export default function useAppwrite(fn,searchParams) {
+  
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -9,7 +10,7 @@ export default function useAppwrite(fn,searchParams) {
     setLoading(true);
     try {
       let res;
-      if(searchParams){
+      if(searchParams){        
         res = await fn(searchParams);  
       }
       else{

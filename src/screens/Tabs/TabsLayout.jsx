@@ -18,12 +18,14 @@ const Tab = createBottomTabNavigator();
         screenOptions={({ route }) => ({
           tabBarIcon: ({ focused, color, size }) => {
             let iconName;
+            console.log(route.name);
+            
 
-            if (route.name === 'Home') {
+            if (route.name === 'home') {
               iconName = focused ? 'home' : 'home-outline';
-            } else if (route.name === 'Profile') {
+            } else if (route.name === 'profile') {
               iconName = focused ? 'person' : 'person-outline';
-            } else if (route.name === 'Settings') {
+            } else if (route.name === 'create') {
               iconName = focused ? 'settings' : 'settings-outline';
             }
 
@@ -31,6 +33,10 @@ const Tab = createBottomTabNavigator();
           },
           tabBarActiveTintColor: '#FF9C01',
           tabBarInactiveTintColor: 'gray',
+          tabBarStyle: {
+            backgroundColor: '#161622',
+            borderTopWidth: 0,    
+          },
           headerShown: false,
         })}
       >

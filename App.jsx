@@ -19,6 +19,7 @@ import LandingPage from "./src/screens/LandingPage";
 import { AuthLayout } from "./src/screens/Auth/AuthLayout";
 import { NavigationContainer } from "@react-navigation/native";
 import TabsLayout from "./src/screens/Tabs/TabsLayout";
+import Search from "./src/screens/Search";
 // import { createStackNavigator } from "@react-navigation/stack";
 // import { createNativeStackNavigator } from "@react-navigation/native-stack";
 // import SignUp from "./src/screens/Auth/SignUp";
@@ -66,6 +67,11 @@ function App(){
           <RootStack.Screen
             name="tabs"
             component={TabsLayout}
+            options={{ headerShown: false }}
+          />
+          <RootStack.Screen
+            name="search"
+            component={Search}
             options={{ headerShown: false }}
           />
         </RootStack.Navigator>

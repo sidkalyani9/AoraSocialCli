@@ -1,6 +1,7 @@
 import { View, TextInput, TouchableOpacity, Image, Alert } from 'react-native'
 import React, { useState } from 'react'
 import { icons } from '../constants';
+import { useNavigation } from '@react-navigation/native';
 // import { router, usePathname } from 'expo-router';
 
 export const SearchInput = ({placeholder, initialQuery}) => {
@@ -8,6 +9,8 @@ export const SearchInput = ({placeholder, initialQuery}) => {
     // const pathName = usePathname()
     const [searchParam, setSearchParam] = useState(initialQuery || '')
     const [focused, setFocused] = useState(false)
+
+    const navigation = useNavigation()
 
   return (
     
@@ -32,7 +35,8 @@ export const SearchInput = ({placeholder, initialQuery}) => {
                 }
                 else{
                     // if(pathName.startsWith('/search')){
-                    //     console.log(pathName + "" + searchParam)
+                        console.log( searchParam)
+                        navigation.navigate("search", {searchParam})
                     //     router.setParams({searchParam})
                     // }
                     // else{

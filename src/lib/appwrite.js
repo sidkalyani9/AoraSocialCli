@@ -233,6 +233,8 @@ export async function getUserPosts(userId) {
 
 // Get video posts that matches search query
 export async function searchPosts(query) {
+  console.log(query);
+  
   
   try {
     const posts = await databases.listDocuments(
