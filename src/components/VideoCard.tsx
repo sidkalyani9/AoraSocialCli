@@ -1,7 +1,8 @@
 import { View, Text, Image, TouchableOpacity, Dimensions } from 'react-native'
-import React, { useState } from 'react'
+import React, { useRef, useState } from 'react'
 import { icons } from '../constants'
 // import { ResizeMode, Video } from 'expo-av'
+import VideoPlayer, {VideoPlayerRef} from 'react-native-video-player';
 
 export const VideoCard = (
     {
@@ -32,6 +33,7 @@ export const VideoCard = (
             // shadowOffset: { width: 0, height: 2 },
             // shadowRadius: 4,
           };
+        const playerRef = useRef<VideoPlayerRef>(null);
 
   return (
     <View className="flex-col items-center px-4 mb-14">
@@ -69,23 +71,23 @@ export const VideoCard = (
             </View> */}
 
         </View>
-
         {   
+            
             play? 
                 (
-                    // <Video 
-                    //     source={{uri: video}}
-                    //     style={videoStyles}
-                    //     useNativeControls
-                    //     shouldPlay
-                    //     onPlaybackStatusUpdate={(status) => {
-                    //         if(status.didJustFinish){
-                    //         setPlay(false)
-                    //         }
-                    //     }}
-                    //     resizeMode={ResizeMode.COVER}
-                    // />
-                    <></>
+                    <VideoPlayer
+                        ref={playerRef}
+                        autoplay={true}
+                        source={{
+                            uri: video
+                        }}
+                        onError={(e) => console.log(e)}
+                        showDuration={false}
+                        style={videoStyles}
+                        resizeMode='cover'
+                        onEnd={() => setPlay(false)}
+                    />
+                    
                 )
             :
                 <TouchableOpacity 
@@ -106,6 +108,8 @@ export const VideoCard = (
                     />
                 </TouchableOpacity>
         }
+
+            
 
     </View>
   )

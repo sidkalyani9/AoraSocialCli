@@ -1,5 +1,5 @@
 import { TouchableOpacity, ImageBackground, Dimensions, RefreshControl, Text, View, ActivityIndicator } from 'react-native'
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { FlatList } from 'react-native'
 import { EmptyState } from './EmptyState'
 import * as Animatable from 'react-native-animatable';
@@ -7,6 +7,7 @@ import * as Animatable from 'react-native-animatable';
 import { useGlobalContext } from '../context/GlobalProvider';
 import { isLoading } from 'expo-font';
 import { Loader } from './Loader';
+import VideoPlayer, {VideoPlayerRef} from 'react-native-video-player';
 
 const zoomIn = {
   0: {
@@ -27,9 +28,12 @@ const zoomOut = {
 }
 
 const {width:screenWidth} = Dimensions.get('window')
+// const playerRef = useRef<import('react-native-video-player').VideoPlayerRef>(null);
+const playerRef = useRef<VideoPlayerRef>(null);
+
 
 const videoStyles = {
-  width: screenWidth*0.52, // Use dynamic width
+  width: screenWidth*0.52, // Use dynamic width<VideoPlayerRef>
   height: screenWidth*0.8, // Use dynamic height
   borderRadius: 35,
   marginTop:screenWidth*0.055,
@@ -43,6 +47,8 @@ const videoStyles = {
 const TrendingItem = ({activeItem, item}) => {
   
   const [playing, setPlaying] = useState(false);
+  // console.log(item);
+  
 
   return(
     <Animatable.View
@@ -66,7 +72,18 @@ const TrendingItem = ({activeItem, item}) => {
             //   }}
             //   resizeMode={ResizeMode.COVER}
             // />
-            <></>
+            <VideoPlayer
+              ref={playerRef}
+              autoplay={true}
+              source={{
+                uri: item.video
+              }}
+              onError={(e) => console.log(e)}
+              showDuration={false}
+              style={videoStyles}
+              resizeMode='cover'
+              onEnd={() => setPlaying(false)}
+            />
           )
           :
           (

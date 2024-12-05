@@ -69,7 +69,6 @@ const Home = () => {
       <FlatList 
         data={[...posts].reverse() || []}     // spreading operator is used to create copy instead of reversing original posts array
         keyExtractor={(item) => item.$id.toString()}
-        
         renderItem={({item}) => (  
           <View className="mt-5">   
             {

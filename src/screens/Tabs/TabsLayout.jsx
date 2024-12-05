@@ -1,4 +1,4 @@
-import { View, Text } from 'react-native'
+import { View, Text, Image } from 'react-native'
 import React from 'react'
 import { NavigationContainer } from '@react-navigation/native';
 import Home from './Home';
@@ -6,6 +6,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Profile from './Profile';
 import Create from './Create';
 import Icon from 'react-native-vector-icons/Ionicons';
+import { icons } from '../../constants';
 
 const TabsLayout = () => {
 
@@ -18,21 +19,20 @@ const Tab = createBottomTabNavigator();
         screenOptions={({ route }) => ({
           tabBarIcon: ({ focused, color, size }) => {
             let iconName;
-            console.log(route.name);
-            
+            let colorName;           
 
             if (route.name === 'home') {
-              iconName = focused ? 'home' : 'home-outline';
+              iconName = icons.home;
             } else if (route.name === 'profile') {
-              iconName = focused ? 'person' : 'person-outline';
+              iconName = icons.profile;
             } else if (route.name === 'create') {
-              iconName = focused ? 'settings' : 'settings-outline';
+              iconName = icons.plus;
             }
 
-            return <Icon name={iconName} size={size} color={color} />;
+            return <Image className='w-6 h-6' source={iconName} tintColor={color} />;
           },
           tabBarActiveTintColor: '#FF9C01',
-          tabBarInactiveTintColor: 'gray',
+          tabBarInactiveTintColor: '#CDCDE0',
           tabBarStyle: {
             backgroundColor: '#161622',
             borderTopWidth: 0,    
