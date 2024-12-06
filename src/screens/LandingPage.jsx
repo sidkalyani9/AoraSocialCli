@@ -31,7 +31,7 @@ const LandingPage = () => {
       console.log("res loading: " + isLoading);
       
       // Navigate after rendering to avoid state update during render
-      navigation.navigate('tabs', { screen: 'home' });
+      navigation.replace('tabs', { screen: 'home' });
     }
   }, [isLoading, isLoggedIn, navigation]);
 
@@ -88,7 +88,7 @@ const LandingPage = () => {
           
             <CustomButton 
               customText={"Continue with Email"}
-              handlePress={() => navigation.navigate('auth', {screen: 'signin'})}  
+              handlePress={() => navigation.replace('auth', {screen: 'signin'})}  
               containerStyles="mt-10 "
               containerViewStyles="absolute bottom-10"
               isLoading={isLoading}
